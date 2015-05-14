@@ -39,13 +39,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="AutoMapper">
       <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="AutoMapper.Net4">
       <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Tools.Contracts">
@@ -68,6 +69,9 @@
     </Reference>
     <Reference Include="Microsoft.SqlServer.Dac.Extensions">
       <HintPath>..\packages\Microsoft.SqlServer.DACFx.12.0.2603.2\lib\Microsoft.SqlServer.Dac.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -159,7 +163,6 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Style\MasterPage.css" />
     <Content Include="Microsoft.SqlServer.Dac.xml" />
-    <EmbeddedResource Include="NHibernate\Mapping\Event.hbm.xml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -193,21 +196,19 @@
     <Content Include="Views\Error\PageNotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Business\Business.csproj">
+    <ProjectReference Include="..\Business\Events.Business.csproj">
       <Project>{f8904f7d-9b22-4c99-ad9d-7017485a0d17}</Project>
-      <Name>Business</Name>
+      <Name>Events.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NHibernateDataProvider\NHibernateDataProvider.csproj">
+    <ProjectReference Include="..\NHibernateDataProvider\Events.NHibernateDataProvider.csproj">
       <Project>{c32d843d-e0a8-48a3-8489-88458a81bbda}</Project>
-      <Name>NHibernateDataProvider</Name>
+      <Name>Events.NHibernateDataProvider</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Events\Create.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NHibernate\Configuration\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -236,6 +237,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

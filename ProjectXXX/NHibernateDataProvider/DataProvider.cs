@@ -12,23 +12,10 @@ namespace NHibernateDataProvider
 {
     public class DataProvider
     {
-        private ISessionFactory SessionFactory;
-        ISession OpenSession()
-        {
-            if (SessionFactory == null)
-            {
-                var cfg = new Configuration();
-                var data = cfg.Configure(
-                    HttpContext.Current.Server.MapPath(@"~/Web.config"));
-                cfg.AddDirectory(new System.IO.DirectoryInfo(HttpContext.Current.Server.MapPath(@"~/NHibernate/Mapping")));
-                SessionFactory = data.BuildSessionFactory();
-            }
-            return SessionFactory.OpenSession();
-        }
         public IList<Event> GetEvents()
         {
             IList<Event> Events;
-            using (ISession session = OpenSession())
+            using (ISession session = NHibernateHelper.OpenSession())
             {
                 IQuery query = session.CreateQuery("from Event");
                 Events = query.List<Event>();
@@ -38,7 +25,7 @@ namespace NHibernateDataProvider
         public Event GetEventById(string id)
         {
             Event e = new Event();
-            using (ISession session = OpenSession())
+            using (ISession session = NHibernateHelper.OpenSession())
             {
                 e = session.Get<Event>(id);
             }
@@ -46,7 +33,7 @@ namespace NHibernateDataProvider
         }
         public void CreateEvent(Event e)
         {
-            using (ISession session = OpenSession())
+            using (ISession session = NHibernateHelper.OpenSession())
             {
                 using (ITransaction tran = session.BeginTransaction())
                 {
@@ -58,7 +45,7 @@ namespace NHibernateDataProvider
 
         public void UpdateEvent(Event e)
         {
-            using (ISession session = OpenSession())
+            using (ISession session = NHibernateHelper.OpenSession())
             {
                 using (ITransaction tran = session.BeginTransaction())
                 {
@@ -70,7 +57,7 @@ namespace NHibernateDataProvider
 
         public void DeleteEvent(Event e)
         {
-            using (ISession session = OpenSession())
+            using (ISession session = NHibernateHelper.OpenSession())
             {
                 using (ITransaction tran = session.BeginTransaction())
                 {
