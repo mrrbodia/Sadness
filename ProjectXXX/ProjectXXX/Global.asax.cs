@@ -6,6 +6,10 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 
+using Business;
+using ProjectXXX.Models;
+using Business.Entities;
+
 namespace ProjectXXX
 {
     // Примечание: Инструкции по включению классического режима IIS6 или IIS7 
@@ -15,6 +19,10 @@ namespace ProjectXXX
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+
+            //AutofacConfig.Configuration();
+            AutoMapper.Mapper.CreateMap<Event, EventViewModel>();
+            AutoMapper.Mapper.CreateMap<EventViewModel, Event>();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
