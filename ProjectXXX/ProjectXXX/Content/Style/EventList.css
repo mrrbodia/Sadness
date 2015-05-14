@@ -1,0 +1,64 @@
+﻿.event {
+    display: flex;
+    padding-top: 20px;
+    color: #e5e5e5;
+}
+
+.date {
+    text-align: center;
+    min-width: 90px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+
+    .date .day {
+        font-size: 2.76375em;
+        font-weight: 500;
+    }
+
+    .date .month {
+        font-size: 1.5375em;
+        font-weight: 300;
+    }
+
+.info {
+    flex: 1 0 auto;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+
+    .info .title {
+        font-weight: 300;
+        font-size: 1.7325em;
+    }
+
+    .info .location {
+        color: #b8b8b8;
+        font-weight: 400;
+        font-size: 1.0725em;
+    }
+
+    .info .members-count {
+        color: #808080;
+        font-weight: 400;
+        font-size: 0.825em;
+    }
+
+.join {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+    .join .image {
+        width: 42px;
+        height: auto;
+    }
+
+    .join .caption {
+        text-transform: uppercase;
+        font-weight: 300;
+    }

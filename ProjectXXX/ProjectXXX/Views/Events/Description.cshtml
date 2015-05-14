@@ -1,0 +1,32 @@
+﻿@model ProjectXXX.Models.EventViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Description</h2>
+
+<table>
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Description</td>
+            <td>From</td>
+            <td>To</td>
+            <td>Location</td>
+        </tr>
+    </thead>
+    <tbody>
+               <tr>
+               <td>@Model.Id</td>
+               <td>@Model.Name</td>
+                <td>@Model.Description</td>
+                <td>@Model.FromDate.ToShortDateString()</td>
+                <td>@Model.ToDate.ToShortDateString()</td>
+                <td>@Model.Location</td>
+                </tr> 
+    </tbody>
+</table>
+<button>Join</button>

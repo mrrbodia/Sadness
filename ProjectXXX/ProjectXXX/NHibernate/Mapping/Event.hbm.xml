@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="Business"
+                   namespace="Business.Entities">
+  <class name ="Event">
+    <id name ="Id">
+      <column name ="Id"  not-null="true"/>
+    </id>
+    <property name = "Name"/>
+    <property name ="Description"/>
+    <property name ="FromDate"/>
+    <property name ="ToDate"/>
+    <property name ="Location"/>
+  </class>
+  
+</hibernate-mapping>

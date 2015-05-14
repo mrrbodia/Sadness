@@ -1,0 +1,38 @@
+﻿@using System.Globalization
+@model IEnumerable<ProjectXXX.Models.EventViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    foreach (var element in Model)
+    {
+        <div class="event">
+            <div class="date">
+                <div class="day">
+                    @element.FromDate.Day
+                </div>
+                <div class="month">
+                    @CultureInfo.InvariantCulture.DateTimeFormat.GetAbbreviatedMonthName(element.FromDate.Month)
+                </div>
+            </div>
+            <div class="info">
+                <h2 class="title">
+                    @element.Name
+                </h2>
+                <div class="location">
+                    @element.Location
+                </div>
+                <div class="members-count">
+                    293 members 
+                    @Html.RouteLink("Description", "Description", new { id = element.Id })
+                </div>
+            </div>
+            <a class="join" href="#">
+                <img src="@Url.Content("~/Content/Image/Join.png")" class="image"/>
+                <p class="caption">Join</p>
+            </a>
+        </div>
+    }
+}

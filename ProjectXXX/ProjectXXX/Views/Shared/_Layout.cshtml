@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Style/MasterPage.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Style/EventList.css")" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <header class="page-header main-padding">
+        <nav class="navigation">
+            <ul class="menu">
+                @{
+                    string routeName = ViewContext.RouteData.DataTokens.Values.ElementAt(0).ToString();
+                    @NavigationLink("Home", "Default", routeName);
+                    @NavigationLink("Events", "EventList", routeName);
+                    @NavigationLink("Create Event", "Create", routeName);
+                 }  
+            </ul>
+        </nav>
+
+    </header>
+    <div class="content main-padding">
+        @RenderBody()
+    </div>
+</body>
+</html>
+
+@helper NavigationLink(string linkName, string routeName, string currentRouteName)
+{
+    if (string.Equals(routeName, currentRouteName, StringComparison.InvariantCultureIgnoreCase))
+    {
+        <li class="item active">
+            <p>@linkName</p>
+        </li>
+    }
+    else
+    {
+        <li class="item">
+            @Html.RouteLink(@linkName, routeName)
+        </li>
+    }
+}
