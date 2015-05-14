@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 using NHibernate;
 using NHibernate.Cfg;
 using Business.Entities;
+using Business;
 
 namespace NHibernateDataProvider
 {
-    public class DataProvider
+    public class DataProvider : IEventDataProvider
     {
-        public IList<Event> GetEvents()
+        public IList<Event> GetAllElements()
         {
             IList<Event> Events;
             using (ISession session = NHibernateHelper.OpenSession())
@@ -22,16 +23,14 @@ namespace NHibernateDataProvider
             }
             return Events;
         }
-        public Event GetEventById(string id)
+        public Event GetElementById(string id)
         {
-            Event e = new Event();
             using (ISession session = NHibernateHelper.OpenSession())
             {
-                e = session.Get<Event>(id);
+                return session.Get<Event>(id);
             }
-            return e;
         }
-        public void CreateEvent(Event e)
+        public void AddElement(Event e)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
@@ -43,7 +42,7 @@ namespace NHibernateDataProvider
             }        
         }
 
-        public void UpdateEvent(Event e)
+        public void UpdateElement(Event e)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
@@ -55,7 +54,7 @@ namespace NHibernateDataProvider
             }
         }
 
-        public void DeleteEvent(Event e)
+        public void DeleteElement(Event e)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
