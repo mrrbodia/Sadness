@@ -8,15 +8,17 @@ using AutoMapper;
 using Business.Entities;
 using ProjectXXX.Models;
 using ProjectXXX.Helpers;
+using Business;
 
 namespace ProjectXXX.Controllers
 {
     public class EventsController : Controller
     {
-        private static DataProvider Data;
-        static EventsController()
+        private readonly IEventDataProvider _data;
+
+        private EventsController(IEventDataProvider data)
         {
-            Data = new DataProvider();
+            _data = data;
         }
         
         public ActionResult Index()
@@ -26,14 +28,14 @@ namespace ProjectXXX.Controllers
 
         public ActionResult EventList()
         {
-            var eList = Data.GetEvents();
+            var eList = _data.GetAllElements();
             var viewModelInstances = new EventMapper<Event, EventViewModel>().MapList(eList);
             return View(viewModelInstances);
         }
 
         public ActionResult Description(string id)
         {
-            var e = Data.GetEventById(id);
+            var e = _data.GetElementById(id);
             if (e != null)
             {
                 var eventViewModel = new EventMapper<Event, EventViewModel>().Map(e);
@@ -52,9 +54,9 @@ namespace ProjectXXX.Controllers
         public ActionResult Create(EventViewModel model)
         {
                 try
-                {
+                {   
                     var e = new EventMapper<EventViewModel, Event>().Map(model);
-                    Data.CreateEvent(e);
+                    _data.AddElement(e);
                     return RedirectToRoute("EventList");
                 }
                 catch
