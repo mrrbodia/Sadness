@@ -33,6 +33,8 @@ namespace ProjectXXX
 
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
+            CultureConfig.SetCulture("en");
+            
         }
     }
 }

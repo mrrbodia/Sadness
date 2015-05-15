@@ -29,27 +29,21 @@ namespace ProjectXXX.Controllers
 
         public ActionResult EventList()
         {
-            var eList = _data.GetAllElements();
-            var viewModelInstances = Mapper.Map<IList<EventViewModel>>(eList);
+            //var eList = _data.GetAllElements();
+            var result = WebCacheManager.FromCache<IList<Event>>("EventList" + new DateTime().Hour, () => { return _data.GetAllElements(); });
+            var viewModelInstances = Mapper.Map<IList<EventViewModel>>(result);
             return View(viewModelInstances);
         }
 
         public ActionResult Description(string id)
         {
-            var result = HandlingCache.FromCache("Events::" + id, () => { return _data.GetElementById(id); });
+            var result = WebCacheManager.FromCache("Event: " + id, () => { return _data.GetElementById(id); });
 
             if (result == null)
             {
-                return RedirectToRoute("Error.NotFound");
+                return RedirectToRoute("404-PageNotFound");
             }
             var model = Mapper.Map<Event, EventViewModel>(result);
-            /*var e = _data.GetElementById(id);
-            if (e != null)
-            {
-                var model = Mapper.Map<EventViewModel>(e);
-                return View(model);
-            }
-            return RedirectToRoute("EventNotFound");*/
             return View(model);
         }
 
@@ -66,7 +60,7 @@ namespace ProjectXXX.Controllers
             {
                 var e = Mapper.Map<Event>(model);
                 _data.AddElement(e);
-                HandlingCache.Clear();
+                WebCacheManager.Clear();
                 return RedirectToRoute("EventList");
             }
             return View();

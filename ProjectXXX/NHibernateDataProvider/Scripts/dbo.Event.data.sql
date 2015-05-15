@@ -1,0 +1,4 @@
+﻿INSERT INTO [dbo].[Event] ([Id], [Name], [Description], [FromDate], [ToDate], [Location]) VALUES (N'7ee76fa6-e703-4bec-96ef-75f5f97336eb', N'qwe', N'qwe', N'1996-03-02 00:00:00', N'1996-03-02 00:00:00', N'qqq')
+INSERT INTO [dbo].[Event] ([Id], [Name], [Description], [FromDate], [ToDate], [Location]) VALUES (N'7ee76fa6-e703-4bec-96ef-75f5f97336ec', N'qwe1', N'qwe3', N'1996-03-02 00:00:00', N'1996-03-02 00:00:00', N'qqq')
+INSERT INTO [dbo].[Event] ([Id], [Name], [Description], [FromDate], [ToDate], [Location]) VALUES (N'7ee76fa6-e703-4bec-96e2-75f5f97336eb', N'qwe2', N'qwe11', N'1996-03-02 00:00:00', N'1996-03-02 00:00:00', N'qqqaa')
+INSERT INTO [dbo].[Event] ([Id], [Name], [Description], [FromDate], [ToDate], [Location]) VALUES (N'7ee76fa6-e703-4bec-96ef-75f5f97336ec', N'qwe1', N'qwe3', N'1996-03-02 00:00:00', N'1996-03-02 00:00:00', N'qqqee')

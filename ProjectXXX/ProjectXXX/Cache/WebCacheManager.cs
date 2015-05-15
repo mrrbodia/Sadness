@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ProjectXXX.Cache
 {
-    public class HandlingCache
+    public class WebCacheManager
     {
         public static TType FromCache<TType>(string key, Func<TType> function)
             where TType : class
