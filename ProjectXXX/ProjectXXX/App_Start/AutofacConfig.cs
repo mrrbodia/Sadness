@@ -16,6 +16,7 @@ namespace ProjectXXX.App_Start
         public static void Config()
         {
             var builder = new ContainerBuilder();
+
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
 
             builder.RegisterType<NHibernateEventDataProvider>().As<IEventDataProvider>();
