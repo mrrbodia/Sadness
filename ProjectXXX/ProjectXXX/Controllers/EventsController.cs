@@ -8,6 +8,7 @@ using AutoMapper;
 using Business.Entities;
 using ProjectXXX.Models;
 using Business;
+using ProjectXXX.Cache;
 
 
 namespace ProjectXXX.Controllers
@@ -35,13 +36,21 @@ namespace ProjectXXX.Controllers
 
         public ActionResult Description(string id)
         {
-            var e = _data.GetElementById(id);
+            var result = HandlingCache.FromCache("Events::" + id, () => { return _data.GetElementById(id); });
+
+            if (result == null)
+            {
+                return RedirectToRoute("Error.NotFound");
+            }
+            var model = Mapper.Map<Event, EventViewModel>(result);
+            /*var e = _data.GetElementById(id);
             if (e != null)
             {
                 var model = Mapper.Map<EventViewModel>(e);
                 return View(model);
             }
-            return RedirectToRoute("EventNotFound");
+            return RedirectToRoute("EventNotFound");*/
+            return View(model);
         }
 
         [HttpGet]
@@ -53,16 +62,14 @@ namespace ProjectXXX.Controllers
         [HttpPost]
         public ActionResult Create(EventViewModel model)
         {
-                try
-                {
-                    var e = Mapper.Map<Event>(model);
-                    _data.AddElement(e);
-                    return RedirectToRoute("EventList");
-                }
-                catch
-                {
-                    return View();
-                }          
+            if (ModelState.IsValid)
+            {
+                var e = Mapper.Map<Event>(model);
+                _data.AddElement(e);
+                HandlingCache.Clear();
+                return RedirectToRoute("EventList");
+            }
+            return View();
         }
     }
 }
