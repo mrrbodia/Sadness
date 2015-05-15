@@ -9,6 +9,7 @@ using Business.Entities;
 using ProjectXXX.Models;
 using Business;
 
+
 namespace ProjectXXX.Controllers
 {
     public class EventsController : Controller
