@@ -10,12 +10,12 @@ namespace Business
     {
         IList<T> GetAllElements();
 
-        T GetElementById();
+        T GetElementById(string id);
 
         void AddElement(T element);
 
-        void DeleteElement(string id);
+        void DeleteElement(T element);
 
-        void UpdateElement(string id);
+        void UpdateElement(T element);
     }
 }

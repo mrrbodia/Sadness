@@ -11,7 +11,7 @@ using Business;
 
 namespace NHibernateDataProvider
 {
-    public class DataProvider : IEventDataProvider
+    public class NHibernateEventDataProvider : IEventDataProvider
     {
         public IList<Event> GetAllElements()
         {

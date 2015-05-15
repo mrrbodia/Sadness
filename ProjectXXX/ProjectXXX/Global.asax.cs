@@ -9,6 +9,7 @@ using System.Web.Routing;
 using Business;
 using ProjectXXX.Models;
 using Business.Entities;
+using ProjectXXX.App_Start;
 
 namespace ProjectXXX
 {
@@ -20,12 +21,16 @@ namespace ProjectXXX
         {
             AreaRegistration.RegisterAllAreas();
 
-            //AutofacConfig.Configuration();
+            AutofacConfig.Config();
+
             AutoMapper.Mapper.CreateMap<Event, EventViewModel>();
+
             AutoMapper.Mapper.CreateMap<EventViewModel, Event>();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
+
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
         }

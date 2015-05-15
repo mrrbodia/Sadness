@@ -7,7 +7,7 @@ using Business.Entities;
 
 namespace Business
 {
-    interface IEventDataProvider : IEntityDataProvider<Event>
+    public interface IEventDataProvider : IEntityDataProvider<Event>
     {
         
     }

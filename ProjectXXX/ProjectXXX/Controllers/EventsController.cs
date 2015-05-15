@@ -7,7 +7,6 @@ using NHibernateDataProvider;
 using AutoMapper;
 using Business.Entities;
 using ProjectXXX.Models;
-using ProjectXXX.Helpers;
 using Business;
 
 namespace ProjectXXX.Controllers
@@ -16,7 +15,7 @@ namespace ProjectXXX.Controllers
     {
         private readonly IEventDataProvider _data;
 
-        private EventsController(IEventDataProvider data)
+        public EventsController(IEventDataProvider data)
         {
             _data = data;
         }
@@ -29,7 +28,7 @@ namespace ProjectXXX.Controllers
         public ActionResult EventList()
         {
             var eList = _data.GetAllElements();
-            var viewModelInstances = new EventMapper<Event, EventViewModel>().MapList(eList);
+            var viewModelInstances = Mapper.Map<IList<EventViewModel>>(eList);
             return View(viewModelInstances);
         }
 
@@ -38,8 +37,8 @@ namespace ProjectXXX.Controllers
             var e = _data.GetElementById(id);
             if (e != null)
             {
-                var eventViewModel = new EventMapper<Event, EventViewModel>().Map(e);
-                return View(eventViewModel);
+                var model = Mapper.Map<EventViewModel>(e);
+                return View(model);
             }
             return RedirectToRoute("EventNotFound");
         }
@@ -54,8 +53,8 @@ namespace ProjectXXX.Controllers
         public ActionResult Create(EventViewModel model)
         {
                 try
-                {   
-                    var e = new EventMapper<EventViewModel, Event>().Map(model);
+                {
+                    var e = Mapper.Map<Event>(model);
                     _data.AddElement(e);
                     return RedirectToRoute("EventList");
                 }
